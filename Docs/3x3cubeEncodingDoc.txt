@@ -1,0 +1,79 @@
+
+	3x3 rubiks cube encoding
+	========================
+
+Each part of the cube is one char. 
+
+3x3 = 27 
+the middles never change: 27 - 6 = 21
+the very center of the cube is not really part of the puzzle: 21 - 1 = 20
+
+Hence 
+1 cube = 20 chars
+
+There are 2 types of parts of the cube: 
+	1. edges
+	2. corners 
+For each I need to keep track of
+	1. Which piece it is
+	2. Current position
+	3. Current Orientation
+	4. Correct Orientation  
+
+------      1. Which piece it is     ------
+	This is tracked by recording where the piece wants to be. Obviously the blue yellow edge needs to be between the blue and yellow centers. The method that I'm using tracks what kind of piece it is by giving each piece a code based on its desired position. However, sometimes the blue side is on the bottom or on the left or in any other of 4 positions. This code tracks the absolute position. That way I don't have to worry about the orientation of the whole cube. 
+I track all this using the last 4 bits of the char that represents each piece. 
+
+	Edges 
+
+top	00	left 	0	front	0
+middle	01	right	1	back	1
+bottom	10
+
+top layer (imagine rotating the top 45 degrees CCW)
+	 ___ ___ ___
+	|___|_b_|___|	a = 0000	b = 0001
+	|_a_|___|_d_|
+	|___|_c_|___|	c = 0010	d = 0011
+
+
+middle layer 
+	 ___ ___ ___
+	|_b_|___|_d_|	a = 0100	b = 0101
+	|___|___|___|
+	|_a_|___|_c_|	c = 0110	d = 0111
+
+
+bottom layer (imagine rotating the top 45 degrees CCW)
+	 ___ ___ ___
+	|___|_b_|___|	a = 1000	b = 1001
+	|_a_|___|_d_|
+	|___|_c_|___|	c = 1010	d = 1011
+
+
+	Corners
+
+top	0	left	0	front	0
+bottom	1	right	1	back	1
+
+
+top layer 
+	 ___ ___ ___
+	|_b_|___|_d_|	a = 000	b = 001
+	|___|___|___|
+	|_a_|___|_c_|	c = 010	d = 011
+
+top layer 
+	 ___ ___ ___
+	|_b_|___|_d_|	a = 100	b = 101
+	|___|___|___|
+	|_a_|___|_c_|	c = 110	d = 111
+
+
+------     2. Current position       ------
+	This is tracked by current order of the chars in the array of the whole cube. It is the 8 corners first and then the 12 edges. They are ordered in increasing position value. So the corner that is currently in the top front left is the very first in the array. 
+
+------     3. Current Orientation    ------
+	
+------     4. Correct Orientation    ------ 
+	The value of 0.
