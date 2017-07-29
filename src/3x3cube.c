@@ -8,6 +8,9 @@
  *
  */
 
+#include <string.h>
+#include <stdlib.h>
+
 void * getEmptyCube()
 {
     char * cube = calloc( 20, 1 );
@@ -18,7 +21,7 @@ void * getSolvedCube()
 {
     char * cube = calloc( 20, 1 );
 
-    // Corners
+    /* Corners */
     cube[0] = 0x00;
     cube[1] = 0x01;
     cube[2] = 0x02;
@@ -28,7 +31,7 @@ void * getSolvedCube()
     cube[6] = 0x06;
     cube[7] = 0x07;
 
-    // Edges
+    /* Edges */
     cube[8] = 0x00;
     cube[9] = 0x01;
     cube[10] = 0x02;
@@ -45,3 +48,23 @@ void * getSolvedCube()
     return cube;
 }
 
+void * rotateTop( void * incube )
+{
+    char * cube = calloc( 20 );
+    char * in = incube;
+    memcpy( cube, in, 20 );
+
+    char p = cube[0];    //placeholder
+    /* Corners */
+    cube[0] = cube[2];
+    cube[2] = cube[3];
+    cube[3] = cube[1];
+    cube[1] = p;
+
+    p = cube[8];    //placeholder
+    /* Edges */
+    cube[8] = cube[10];
+    cube[10] = cube[11];
+    cube[11] = cube[9];
+    cube[9] = p;
+}
