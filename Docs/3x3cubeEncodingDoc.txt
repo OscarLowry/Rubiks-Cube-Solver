@@ -21,8 +21,15 @@ For each I need to keep track of
 	4. Correct Orientation  
 
 ------      1. Which piece it is     ------
-	This is tracked by recording where the piece wants to be. Obviously the blue yellow edge needs to be between the blue and yellow centers. The method that I'm using tracks what kind of piece it is by giving each piece a code based on its desired position. However, sometimes the blue side is on the bottom or on the left or in any other of 4 positions. This code tracks the absolute position. That way I don't have to worry about the orientation of the whole cube. 
-I track all this using the last 4 bits of the char that represents each piece. 
+	This is tracked by recording where the piece wants to be. Obviously 
+the blue yellow edge needs to be between the blue and yellow centers. 
+The method that I'm using tracks what kind of piece it is by giving 
+each piece a code based on its desired position. However, sometimes the
+blue side is on the bottom or on the left or in any other of 4
+positions. This code tracks the absolute position. That way I don't
+have to worry about the orientation of the whole cube. 
+I track all this using the last 4 bits of the char that represents each 
+piece. 
 
 	Edges 
 
@@ -71,9 +78,41 @@ top layer
 
 
 ------     2. Current position       ------
-	This is tracked by current order of the chars in the array of the whole cube. It is the 8 corners first and then the 12 edges. They are ordered in increasing position value. So the corner that is currently in the top front left is the very first in the array. 
+	This is tracked by current order of the chars in the array of the
+whole cube. It is the 8 corners first and then the 12 edges. 
+They are ordered in increasing position value. So the corner that
+is currently in the top front left is the very first in the array. 
 
 ------     3. Current Orientation    ------
+    Tracking orientation is just as arbitrary. The edges, if facing up
+are in the proper orientation, or down, in the case of the bottom. In the 
+case of the middle, they need to face forward if on the righthand side. this
+makes them have a clockwise effect when looking down. See the diagram below
+for details. 
+    Corners also have to be facing up or down. They can either be rotated 
+clockwise or counterclockwise. 
+
+    Edges
+
+correct 0   incorrect 1
+
+Correct top         correct middle      correct bottom
+     ___ ___ ___       xxx ___ ___       ___ ___ ___
+    |___|xxx|___|     |___|___|___|x    |___|xxx|___|
+    |xxx|___|xxx|     |___|___|___|     |xxx|___|xxx|
+    |___|xxx|___|    x|___|___|___|     |___|xxx|___|
+                               xxx 
+
+    Corners
+
+correct 0   CW 01   CCW 10
+
+Correct top             Correct bottom
+     ___ ___ ___          ___ ___ ___
+    |xxx|___|xxx|        |xxx|___|xxx|
+    |___|___|___|        |___|___|___|
+    |xxx|___|xxx|        |xxx|___|xxx|
+
 	
 ------     4. Correct Orientation    ------ 
 	The value of 0.
