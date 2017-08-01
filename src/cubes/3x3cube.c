@@ -39,9 +39,9 @@ void * getSolvedCube()
     cube[14] = 0x06;
     cube[15] = 0x07;
     cube[16] = 0x08;
-    cube[17] = 0x0A;
-    cube[18] = 0x0B;
-    cube[19] = 0x0C;
+    cube[17] = 0x09;
+    cube[18] = 0x0A;
+    cube[19] = 0x0B;
 
     return cube;
 }
