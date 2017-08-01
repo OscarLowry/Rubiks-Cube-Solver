@@ -10,6 +10,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include "3x3cube.h"
 
 /*
  * Returns a pointer to a solved cube
@@ -43,6 +44,11 @@ void * getSolvedCube()
     cube[19] = 0x0C;
 
     return cube;
+}
+
+void freeCube( void * cube )
+{
+    free( cube );
 }
 
 /* --- Orientation shifting */
